@@ -1,3 +1,5 @@
+'use strict';
+
 // Brute Force
 // Time Com­plex­ity: O(2^n)
 function fibNaive(n) {
@@ -18,7 +20,7 @@ function fibDP(n) {
       return fib[n];
     }
   }
-  
+
   var fib = [];
 
   fib[0] = 0;
@@ -31,6 +33,6 @@ function fibDP(n) {
   return fib;
 }
 
-var i = 50;
+var i = 40;
 console.log("DP:", fibDP(i));
 console.log("Naive:", fibNaive(i));

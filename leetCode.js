@@ -26,7 +26,7 @@ function removeElement(A, val) {
 
   while (i < n) {
     if (A[i] === val) {
-      // swap current element with the last element in the array and then dispose the last
+      // Swap current element with the last element in the array and then dispose the last
       A[i] = A[n - 1];
       n--;
     } else {
@@ -34,13 +34,13 @@ function removeElement(A, val) {
     }
   }
 
-  console.log(n);
+  console.log("\t -> removeElement:", "Original size:", A.length, "| New size:", n);
   return n;
 }
 
 var A = [3, 2, 2, 3];
 var val = 2;
-// removeElement(A, val);
+removeElement(A, val);
 
 /**
  * Reverse a string.
@@ -58,7 +58,7 @@ function reverseString(str) {
     j--;
   }
 
-  console.log(str.toString());
+  console.log("\t -> reverseString:", str.toString());
   return str;
 }
 

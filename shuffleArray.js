@@ -16,8 +16,8 @@ function swap(arr, x, y) {
 /**
  * Knuth Shuffle - O(n)
  * Shuffles an array such that all permutations are equally likely
- * @param {Array} arr - array to be shuffled.
- * @return {void}
+ * @param {Array} A - array to be shuffled.
+ * @return {Array} - the shuffled array
  */
 function shuffleArray(A) {
   var shuffled = 0;
@@ -34,5 +34,5 @@ function shuffleArray(A) {
   return A;
 }
 
-var A = [5, 3, 6, 1, 7];
+var A = [5, 3, 6, 1, 7, 11, -3];
 shuffleArray(A);
