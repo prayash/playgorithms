@@ -7,7 +7,19 @@ function fibNaive(n) {
 // Memoization
 // Time Com­plex­ity: O(n), Space Com­plex­ity: O(n)
 function fibDP(n) {
-  var fib = [n + 1];
+  function topDown(n) {
+    var fib = [];
+    if (n == 0 || n == 1) return 1;
+
+    if (fib[n] != 0) {
+      return fib[n];
+    } else {
+      fib[n] = topDown(n - 1) + topDown(n - 2);
+      return fib[n];
+    }
+  }
+  
+  var fib = [];
 
   fib[0] = 0;
   fib[1] = 1;
