@@ -263,3 +263,174 @@ function maxArea(A) {
 
 var A = [1, 1];
 maxArea(A);
+
+/**
+ * Character Frequency - O(n) time / O(n) space
+ * Use a hash table to count the frequency of each character in a given string.
+ * @param {String} str - String to process
+ * @return {Array} - array of all chars and their frequencies
+ */
+function characterFrequency(str) {
+  var freq = {};
+
+  for (var i = 0; i < str.length; i++) {
+    if (freq[str[i]]) {
+      freq[str[i]]++;
+    } else {
+      freq[str[i]] = 1;
+    }
+  }
+
+  console.log("\t -> characterFrequency:", freq);
+  return freq;
+}
+
+var str = "Hello⚽world";
+characterFrequency(str);
+
+/**
+ * Valid Anagram - O(n) time / O(n) space
+ * Given two strings s and t, write a function to determine if t is an anagram of s.
+ * For example, s = "anagram", t = "nagaram", return true. s = "rat", t = "car", return false.
+ * @param {String} s - a String
+ * @param {String} t - potential anagram of s
+ * @return {Boolean} - whether it's a valid anagram
+ */
+function validAnagram(s, t) {
+  if (s.length !== t.length) return false;
+
+  var hash = {};
+  var result = true;
+
+  for (var c in s) {
+    var char = s.charAt(c);
+    if (!hash[char]) hash[char] = 1;
+    else hash[char]++;
+  }
+
+  for (var c in t) {
+    var char = t.charAt(c);
+    hash[char]--;
+    if (hash[char] < 0 || isNaN(hash[char])) result = false;
+  }
+
+  console.log("\t -> validAnagram:", result);
+  return result;
+}
+
+var s = 'anagram';
+var t = 'nagaram';
+var s = 'rat';
+var t = 'car';
+var s = 'a';
+var t = 'b';
+validAnagram(s, t);
+
+/**
+ * Length of Longest Substring Without Repeating Characters - O(n) time / O(setSize) space
+ * Given a string, find the length of the longest substring without repeating characters.
+ * @param {String} s - String to process
+ * @return {Int} - length of longest substring
+ */
+function lengthOfLongestSubstring(s) {
+  if (s === '') return 0;
+  if (s.length < 2) return 1;
+
+  var i = 0, j = 0, max = 0;
+  var set = {};
+
+  while (j < s.length) {
+    if (!set[s[j]]) {
+      set[s[j]] = 1;
+      j++;
+      max = Math.max(max, Object.keys(set).length);
+    } else {
+      delete set[s[i]];
+      i++;
+    }
+  }
+
+  console.log("\t -> lengthOfLongestSubstring:", max);
+  return max;
+}
+
+var str = "abcabcbb"; // abc
+var str = "bbbbb"; // b
+var str = "pwwkew"; // wke
+var str = "au"; // 2
+var str = "dvdf"; // 3
+lengthOfLongestSubstring(str);
+
+/**
+ * Needle in a Haystack - O(n) time / O(1) space
+ * Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+ * @param {String} haystack - main string
+ * @param {String} needle - substring to find in haystack
+ * @return {Int} - index of the first occurence of needle
+ */
+function strStr(haystack, needle) {
+  var m = haystack.length;
+  var n = needle.length;
+
+  if (!n) return 0;
+  for (var i = 0; i < m - n + 1; i++) {
+    var j = 0;
+    while (j < n) {
+      if (haystack[i + j] != needle[j]) break;
+      j++;
+    }
+
+    if (j == n) {
+      console.log("\t -> strStr:", i);
+      return i;
+    }
+  }
+
+  console.log("\t -> strStr:", -1);
+  return -1;
+}
+
+var haystack = "mississippi";
+var needle = "mississippi";
+strStr(haystack, needle);
+
+/**
+ * String to Integer (atoi) - O(n) time / O(1) space
+ * Implement atoi to convert a string to an integer.
+ * @param {String} s - main string to convert
+ * @return {Int} - the string converted to an integer
+ */
+function atoi(s) {
+  var sign = 1;
+  var int = 0;
+  var baseCharCode = '0'.charCodeAt(0);
+  var INT_MAX = Math.pow(2, 31) - 1;
+  var INT_MIN = Math.pow(-2, 31);
+
+  s = s.trim();
+  if (s[0] === '-' || s[0] === '+') {
+    sign = s[0] === '-' ? -1 : 1;
+    s = s.substring(1);
+  }
+
+  for (var c in s) {
+    var digit = s.charCodeAt(c) - baseCharCode;
+    if (0 <= digit && digit <= 9) {
+      int *= 10;
+      int += digit;
+    } else {
+      break;
+    }
+  }
+
+  int = sign * int;
+
+  if (int > INT_MAX) int = INT_MAX;
+  if (int < INT_MIN) int = INT_MIN;
+
+  console.log("\t -> atoi:", int);
+  return int;
+}
+
+var str = '299';
+atoi(str);
