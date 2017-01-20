@@ -49,7 +49,7 @@ function getMaxProfitReduced(A) {
 function getMaxProfitOptimal(A) {
   if (A.length < 2) throw new Error("Getting profit requires at least 2 prices!");
 
-  // Greefily update minPrice and maxProfit so they are initialized to the first possible profit
+  // Greedily update minPrice and maxProfit so they are initialized to the first possible profit
   var minPrice = A[0];
   var maxProfit = A[1] - minPrice;
 

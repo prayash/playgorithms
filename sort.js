@@ -131,6 +131,105 @@ console.log("\t > mergeSort: \t ", mergeSort(arr));
  * @param {Array} arr - The unsorted array
  * @return {Array} arr - The sorted array
  */
-function heapSort(arr) {
+function heapSort(arr, cmp) {
+  function comparator(a, b) {
+    return a - b;
+  }
 
+  /**
+   * Finds the correct place of given element in given max heap.
+   * @param {Array} array Array.
+   * @param {Number} index Index of the element which place in the max heap should be found.
+   * @param {Number} heapSize Size of the heap.
+   * @param {function} cmp Comparison function.
+   */
+  function heapify(array, index, heapSize, cmp) {
+    var left = 2 * index + 1;
+    var right = 2 * index + 2;
+    var largest = index;
+    if (left < heapSize && cmp(array[left], array[index]) > 0) {
+      largest = left;
+    }
+    if (right < heapSize && cmp(array[right], array[largest]) > 0) {
+      largest = right;
+    }
+    if (largest !== index) {
+      var temp = array[index];
+      array[index] = array[largest];
+      array[largest] = temp;
+      heapify(array, largest, heapSize, cmp);
+    }
+  }
+
+  /**
+   * Builds max heap from given array.
+   * @param {Array} array Array which should be turned into max heap.
+   * @param {function} cmp Comparison function.
+   * @return {Array} array Array turned into max heap.
+   */
+  function buildMaxHeap(array, cmp) {
+    for (var i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+      heapify(array, i, array.length, cmp);
+    }
+    return array;
+  }
+
+  cmp = cmp || comparator;
+  var size = arr.length;
+  var temp;
+  buildMaxHeap(arr, cmp);
+  for (var i = arr.length - 1; i > 0; i -= 1) {
+    temp = arr[0];
+    arr[0] = arr[i];
+    arr[i] = temp;
+    size -= 1;
+    heapify(arr, 0, size, cmp);
+  }
+  
+  return arr;
 }
+
+console.log("\t > heapSort: \t ", heapSort(arr));
+
+/**
+ * Quick Sort -  O(n^2) time / O(n) space
+ * Quicksort is a divide and conquer algorithm in the style of merge sort.
+ * The basic idea is to find a “pivot” item in the array to compare all other items against, then shift items such
+ * that all of the items before the pivot are less than the pivot value and all the items after the pivot are greater
+ * than the pivot value. After that, recursively perform the same operation on the items before and after the pivot.
+ * @param {Array} arr - The unsorted array
+ * @return {Array} arr - The sorted array
+ */
+function quickSort(arr, left, right) {
+  if (arr.length < 1) return;
+
+  function partition(data, left, right) {
+    var pivot = data[Math.floor((right + left) / 2)];
+    var i = left, j = right;
+
+    while (i <= j) {
+      while (data[i] < pivot) i++;
+      while (data[j] > pivot) j--;
+
+      swap(data, i, j);
+      i++;
+      j--;
+    }
+
+    return i;
+  }
+
+  var index;
+  index = partition(arr, left, right);
+  if (left < index - 1) {
+    quickSort(arr, left, index - 1);
+  }
+
+  if (index < right) {
+    quickSort(arr, index, right);
+  }
+
+  return arr;
+}
+
+console.log("\t > quickSort: \t ", quickSort(arr, 0, arr.length - 1));

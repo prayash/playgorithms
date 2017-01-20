@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Maximal Subarray -  O(n^3) time / O(1) subproblemace
+ * Maximal Subarray -  O(n^3) time / O(1) space
  * Given an array of integers (positive/zero/negative), write a function that
  * calculates the maximum sum of any continuous subarray of the input array.
  * @param {Array} A - the input array
@@ -56,6 +56,3 @@ function maximalSubarrayDP(A) {
 var A = [-1, 5, 100, -1000];
 maximalSubarrayNaive(A);
 maximalSubarrayDP(A);
-
-
-module.exports = maximalSubarrayDP;

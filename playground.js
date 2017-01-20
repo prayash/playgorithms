@@ -66,7 +66,7 @@ function findPairsWithSum(array, sum) {
 
       hash[e] = i;
       if (hash[diff] != i && hash[diff] !== undefined) {
-        console.log("Pair:", array[hash[diff]], "&", array[i], "has sum", sum);
+        console.log("\t -> Pair:", array[hash[diff]], "&", array[i], "has sum", sum);
       }
     }
 
@@ -88,7 +88,10 @@ function findPairsWithSum(array, sum) {
   return elegant();
 }
 
-var array = [5, 15, 8, 9, 3, 2, -1, 4];
-console.log("\t -> ", findPairsWithSum(array, 7));
+var A = [5, 15, 8, 9, 3, 2, -1, 4];
+// var A = [0, 0, 3, 4];
+var t = 7;
+// var t = 0;
+findPairsWithSum(A, t);
 
 // ************************************************************************************
