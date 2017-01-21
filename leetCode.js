@@ -434,3 +434,70 @@ function atoi(s) {
 
 var str = '299';
 atoi(str);
+
+/**
+ * Reverse Integer - O(n) time / O(1) space
+ * Implement atoi to convert a string to an integer.
+ * @param {Int} x - integer to reverse
+ * @return {Int} - final int reversed with preserved sign
+ */
+function reverseInteger(x) {
+  var sign = 1;
+  var int = 0;
+  var baseCharCode = '0'.charCodeAt(0);
+  var INT_MAX = Math.pow(2, 31) - 1;
+  var INT_MIN = Math.pow(-2, 31);
+
+  x = x.toString();
+  if (x[0] === '-' || x[0] === '+') {
+    sign = x[0] === '-' ? -1 : 1;
+    x = x.substring(1);
+  }
+
+  x = x.split('').reverse().join('');
+  x = parseInt(x);
+  x *= sign;
+
+  if (x > INT_MAX) x = 0;
+  if (x < INT_MIN) x = 0;
+
+  console.log("\t -> reverseInteger:", x);
+  return x;
+}
+
+var x = '-123';
+reverseInteger(x);
+
+/**
+ * Valid Parentheses - O(n) time / O(1) space
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ * The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+ * @param {String} s - string to check
+ * @return {Boolean} - whether the parentheses are valid
+ */
+function validParentheses(s) {
+  var result = false;
+  var stack = [];
+  var map = { '(': ')', '{': '}', '[': ']' };
+
+  s = s.split('');
+  for (var c in s) {
+    var char = s[c];
+    var closingParen = map[char];
+    if (closingParen) {
+      stack.push(closingParen);
+    } else if (stack.length === 0 || stack.pop() !== char) {
+      console.log("\t -> validParentheses:", false);
+      return false;
+    }
+  }
+
+  result = stack.length === 0 ? true : false;
+  console.log("\t -> validParentheses:", result);
+  return result;
+}
+
+// var s = '()[]{}';
+// var s = '([)]';
+var s = '){';
+validParentheses(s);
