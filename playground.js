@@ -63,11 +63,10 @@ function findPairsWithSum(array, sum) {
     for (var i = 0; i < array.length; i++) {
       var e = array[i];
       var diff = sum - e;
-
-      hash[e] = i;
       if (hash[diff] != i && hash[diff] !== undefined) {
         console.log("\t -> Pair:", array[hash[diff]], "&", array[i], "has sum", sum);
       }
+      hash[e] = i;
     }
 
     // Store all elements in a hash table. Then iterate through looking for the difference that could satisfy the sum!

@@ -109,7 +109,7 @@ var twoSum = function(A, t) {
   }
 
   result = [lo + 1, hi + 1];
-  console.log("\t -> twoSum:",result);
+  console.log("\t -> twoSum:", result);
   return result;
 };
 
@@ -127,7 +127,7 @@ twoSum(A, t);
 function reverseString(str) {
   var i = 0;
   var j = str.length - 1;
-  str = [...str];
+  str = str.split('');
 
   while (i < j) {
     swap(str, i, j);
@@ -135,7 +135,8 @@ function reverseString(str) {
     j--;
   }
 
-  console.log("\t -> reverseString:", str.toString().replace(/,/g, ''));
+  str = str.join('');
+  console.log("\t -> reverseString:", str);
   return str;
 }
 
@@ -348,6 +349,8 @@ function lengthOfLongestSubstring(s) {
       delete set[s[i]];
       i++;
     }
+
+    // console.log('i:', i, '| j:', j, '| set:', set, '| max:', max);
   }
 
   console.log("\t -> lengthOfLongestSubstring:", max);
@@ -357,8 +360,6 @@ function lengthOfLongestSubstring(s) {
 var str = "abcabcbb"; // abc
 var str = "bbbbb"; // b
 var str = "pwwkew"; // wke
-var str = "au"; // 2
-var str = "dvdf"; // 3
 lengthOfLongestSubstring(str);
 
 /**
@@ -437,7 +438,7 @@ atoi(str);
 
 /**
  * Reverse Integer - O(n) time / O(1) space
- * Implement atoi to convert a string to an integer.
+ * Given an integer, reverse it while preserving the sign.
  * @param {Int} x - integer to reverse
  * @return {Int} - final int reversed with preserved sign
  */
@@ -465,7 +466,7 @@ function reverseInteger(x) {
   return x;
 }
 
-var x = '-123';
+var x = -123;
 reverseInteger(x);
 
 /**
@@ -497,7 +498,103 @@ function validParentheses(s) {
   return result;
 }
 
-// var s = '()[]{}';
-// var s = '([)]';
+var s = '()[]{}';
+var s = '([)]';
 var s = '){';
 validParentheses(s);
+
+/**
+ * Array Equilibrium - O(n) time / O(1) space
+ * Given a zero-indexed array A consisting of N integers, returns any of its equilibrium indices.
+ * The function should return −1 if no equilibrium index exists.
+ * For example, given array A shown above, the function may return 1, 3 or 7, as explained above.
+ * @param {Array} A - array to process
+ * @return {Int} - equilibrium index
+ */
+function arrayEquilibrium(A) {
+  var leftSum = 0;
+  var rightSum = 0;
+
+  for (var i = 0; i < A.length; i++) {
+    rightSum += A[i];
+  }
+
+  for (var e = 0; e < A.length; e++) {
+    rightSum -= A[e];
+    if (leftSum === rightSum) {
+      console.log("\t -> arrayEquilibrium:", e);
+      return e;
+    }
+
+    leftSum += A[e];
+  }
+
+  console.log("\t -> arrayEquilibrium:", -1);
+  return -1;
+}
+
+var A = [-1, 3, -4, 5, 1, -6, 2, 1];
+arrayEquilibrium(A);
+
+/**
+ * Max Consecutive Ones
+ * Given a binary array, find the maximum number of consecutive 1s in this array.
+ * @param {Array} - Array of 1s and 0s
+ * @return {Int} - max consecutive
+ */
+function findMaxConsecutiveOnes(A) {
+  var count = 0;
+  var max = 0;
+
+  for (var i = 0; i < A.length; i++) {
+    max = Math.max(max, count = A[i] === 0 ? 0 : count + 1);
+  }
+
+  console.log("\t -> findMaxConsecutiveOnes:", max);
+  return max;
+}
+
+var A = [1, 1, 0, 1, 1, 1];
+findMaxConsecutiveOnes(A);
+
+/**
+ * Majority Element
+ * Given an array of size n, find the majority element.
+ * The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+ * You may assume that the array is non-empty and the majority element always exist in the array.
+ * @param {Array} - array of integers
+ * @return {Int} - majority element
+ */
+function majorityElement(A) {
+  var count = 0;
+  var majorityElement;
+
+  for (var i = 0; i < A.length; i++) {
+    if (count === 0) {
+      majorityElement = A[i];
+    }
+
+    if (A[i] === majorityElement) {
+      count++;
+    } else {
+      count--;
+    }
+  }
+
+  for (var j = 0; j < A.length; j++) {
+    if (A[j] === majorityElement) {
+      count++;
+    }
+  }
+
+  if (count > Math.floor(A.length / 2)) {
+    console.log("\t -> majorityElement:", majorityElement);
+    return majorityElement;
+  }
+
+  console.log("\t -> majorityElement:", -1);
+  return -1;
+}
+
+var A = [1, 2, 3, 2, 2, 2, 3, 2, 2];
+majorityElement(A);
