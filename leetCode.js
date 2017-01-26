@@ -558,11 +558,11 @@ var A = [1, 1, 0, 1, 1, 1];
 findMaxConsecutiveOnes(A);
 
 /**
- * Majority Element
+ * Majority Element - O(n) time / O(1) space
  * Given an array of size n, find the majority element.
  * The majority element is the element that appears more than ⌊ n/2 ⌋ times.
  * You may assume that the array is non-empty and the majority element always exist in the array.
- * @param {Array} - array of integers
+ * @param {Array} A - array of integers
  * @return {Int} - majority element
  */
 function majorityElement(A) {
@@ -598,3 +598,101 @@ function majorityElement(A) {
 
 var A = [1, 2, 3, 2, 2, 2, 3, 2, 2];
 majorityElement(A);
+
+/**
+ * Merge Sorted Array - O(n) time / O(1) space
+ * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+ * You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold
+ * additional elements from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
+ * @param {Array} A - array of integers
+ * @param {Array} B - array of integers
+ * @return {void} - Do not return anything, modify A in-place instead.
+ */
+function mergeSortedArray(A, m, B, n) {
+  var i = m - 1;
+  var j = n - 1;
+  var k = m + n - 1;
+
+  while (i >= 0 && j >= 0) {
+    if (A[i] > B[j]) {
+      A[k] = A[i];
+      k--;
+      i--;
+    } else {
+      A[k] = B[j];
+      k--;
+      j--;
+    }
+
+    // console.log(A);
+  }
+
+  while (j >= 0) {
+    A[k] = B[j];
+    k--;
+    j--;
+
+    // console.log(A);
+  }
+
+  console.log("\t -> mergeSortedArray:", A);
+}
+
+var A = [1, 2, 3, 0, 0, 0], m = 3;
+var B = [2, 5, 6], n = 3;
+var A = [4, 5, 6, 0, 0, 0], m = 3;
+var B = [1, 2, 3], n = 3;
+mergeSortedArray(A, m, B, n);
+
+/**
+ * Search Insert Position - O(log n) time / O(1) space
+ * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+ * You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold
+ * additional elements from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
+ * @param {Array} A - array of integers
+ * @param {Array} B - array of integers
+ * @return {void} - Do not return anything, modify A in-place instead.
+ */
+function searchInsert(A, t) {
+  var low = 0, high = A.length;
+
+  while (low < high) {
+    var mid = Math.floor(low + (high - low) / 2);
+
+    if (A[mid] < t) {
+      low = mid + 1;
+    } else {
+      high = mid;
+    }
+  }
+
+  console.log("\t -> searchInsert:", low);
+  return low;
+}
+
+var A = [1, 3, 5, 6];
+var t = 7;
+searchInsert(A, t);
+
+
+/**
+ * Pascal's Triangle
+ * Given numRows, generate the first numRows of Pascal's triangle.
+ * @param {Int} numRows - rows to generate
+ * @return {Array of Arrays} - final triangle
+ */
+function pascal(numRows) {
+  var res = [];
+
+  for (var i = 0; i < numRows; i++) {
+    res.push(Array.apply(null, new Array(i + 1)).map(Number.prototype.valueOf, 1));
+    for (var j = 1; j < i; j++) {
+      res[i][j] = res[i - 1][j - 1] + res[i - 1][j];
+    }
+  }
+
+  console.log("\t -> pascal:", res);
+  return res;
+};
+
+pascal(5);
