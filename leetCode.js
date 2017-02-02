@@ -696,3 +696,122 @@ function pascal(numRows) {
 };
 
 pascal(5);
+
+function numRange(A) {
+  var result = '(0-';
+  var bArray = [];
+  for (var i = 0; i < 100; i++) {
+    bArray[i] = true;
+  }
+
+  for (var j = 0; j < A.length; j++) {
+    bArray[A[j]] = false;
+  }
+
+  for (var k = 0; k < bArray.length; k++) {
+    if (bArray[k] === false) {
+      result += k - 1 + ', ' + (k + 1) + '-';
+    }
+  }
+
+  result += bArray.length + ')';
+
+  console.log("\t -> numRange:", result);
+}
+
+var A = [2, 50, 75, 89];
+numRange(A);
+
+/**
+ * Task 1
+ * @param {Int} X - integer to parse
+ * @return {Int} largest - greatest integer after replacement
+ */
+function integerReplacement(X) {
+  var string = X.toString();
+  var largest = 0;
+
+  for (var i = 0; i < string.length - 1; i++) {
+    var firstNum = parseInt(string[i]);
+    var secondNum = parseInt(string[i + 1]);
+
+    // Cal average and cast to string
+    var avg = Math.ceil((firstNum + secondNum) / 2).toString();
+
+    // Append rest of string and replace the two nums with average
+    var potential = parseInt(string.substring(0, i) + avg + string.substring(i + 2));
+    largest = Math.max(largest, potential);
+  }
+
+  console.log("\t -> integerReplacement:", largest);
+  return largest;
+}
+
+var X = 623315;
+integerReplacement(X);
+
+/**
+ * Task 2
+ * @param {String} S - directory listing
+ * @return {Int} count - longest absolute path
+ */
+function longestAbsolutePath(S) {
+  var files = S.split("\n");
+  var count = 0;
+  var indents = 0;
+
+  for (var i = files.length - 1; i > 0; i--) {
+    var line = files[i];
+    var fileLength = line.trim().length;
+
+    // Grab the indent count if it has an image
+    if (line.indexOf('jpeg') > -1 || line.indexOf('gif') > -1) {
+      indents = line.length - fileLength;
+    }
+
+    // Add filename to the absolute path + 1 for the '/'
+    if (indents > line.length - fileLength) {
+      count += fileLength + 1;
+      indents--;
+    }
+  }
+
+  console.log("\t -> longestAbsolutePath:", count);
+  return count;
+}
+
+var input = "dir1\n dir11\n dir12\n  picture.jpeg\n  dir121\n  file1.txt\ndir2\n file2.gif";
+longestAbsolutePath(input);
+
+/**
+ * Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+ * Find all the elements of [1, n] inclusive that do not appear in this array.
+ * Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+ * @param {Array} A - array of Ints
+ * @return {Array} - array of disappeared numbers
+ */
+function findDisappearedNumbers(A) {
+  var res = [];
+
+  for (var i = 0; i < A.length; i++) {
+    var e = A[i];
+
+    if (A[Math.abs(e) - 1] > 0) {
+      A[Math.abs(e) - 1] = -1 * A[Math.abs(e) - 1];
+    }
+  }
+
+  for (var j = 1; j <= A.length; j++) {
+    if (A[j - 1] > 0) {
+      res.push(j);
+    }
+  }
+
+  console.log(A);
+
+  console.log("\t -> findDisappearedNumbers:", res);
+  return res;
+};
+
+var A = [4, 3, 2, 7, 8, 2, 3, 1];
+findDisappearedNumbers(A);
