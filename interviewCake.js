@@ -1,7 +1,7 @@
 /**
  * 1 - Apple Stocks - O(n) time / O(1) space
  * @param {Array} A - the input array
- * @return {int} - max profit
+ * @return {Int} - max profit
  */
 function getMaxProfit(A) {
   if (A.length < 2) throw new Error("Getting profit requires at least 2 prices!");
@@ -36,7 +36,6 @@ function getMaxProfit(A) {
   return maxProfit;
 }
 
-// returns 6 (buying for $5 and selling for $11)
 var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
 getMaxProfit(stockPricesYesterday);
 
@@ -90,7 +89,7 @@ function highestProductOf3(A) {
       current * highestProductOf2,
       current * lowestProductOf2
     );
-    
+
     highestProductOf2 = Math.max(
       highestProductOf2,
       current * lowest,
@@ -113,3 +112,41 @@ function highestProductOf3(A) {
 
 var A = [1, 10, -5, 1, -100];
 highestProductOf3(A);
+
+/**
+ * 2 - Merging Meeting Times - O(n) time / O(1) space
+ * @param {Array of Objects} A - the input array of meeting times as objects
+ * @return {Array of Objects} - meeting times merged
+ */
+function mergeMeetingTimes(A) {
+  var res;
+
+  var sortedMeetings = A.sort(function(a, b) {
+    return a.startTime > b.startTime;
+  });
+
+  res = [sortedMeetings[0]];
+
+  for (var i = 1; i < sortedMeetings.length; i++) {
+    var current = sortedMeetings[i];
+    var last = res[res.length - 1];
+
+    if (current.startTime <= last.endTime) {
+      last.endTime = Math.max(current.endTime, last.endTime);
+    } else {
+      res.push(current);
+    }
+  }
+
+  console.log("\t -> mergeMeetingTimes:", res);
+  return res;
+}
+
+var A = [
+  {startTime: 0,  endTime: 1},
+  {startTime: 3,  endTime: 5},
+  {startTime: 4,  endTime: 8},
+  {startTime: 10, endTime: 12},
+  {startTime: 9,  endTime: 10},
+];
+mergeMeetingTimes(A);
