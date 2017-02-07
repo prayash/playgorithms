@@ -33,6 +33,6 @@ function fibDP(n) {
   return fib;
 }
 
-var i = 40;
+var i = 50;
 console.log("DP:", fibDP(i));
 console.log("Naive:", fibNaive(i));
