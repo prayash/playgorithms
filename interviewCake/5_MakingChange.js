@@ -3,11 +3,11 @@
  * @param {Array of Ints} A - input array of denominations
  * @return {} - meeting times merged
  */
-function coinChange(amount, A) {
+function makingChange(amount, A) {
   var res = 0;
 
-  console.log("\t -> coinChange:", res);
+  console.log("\t -> makingChange:", res);
   return res;
 }
 
-coinChange(4, [1, 2, 3]);
+makingChange(4, [1, 2, 3]);
