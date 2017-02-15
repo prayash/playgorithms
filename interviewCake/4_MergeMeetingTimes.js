@@ -1,5 +1,5 @@
 /**
- * 4 - Merging Meeting Times - O(n) time / O(1) space
+ * 4 - Merging Meeting Times
  * @param {Array of Objects} A - the input array of meeting times as objects
  * @return {Array of Objects} - meeting times merged
  */

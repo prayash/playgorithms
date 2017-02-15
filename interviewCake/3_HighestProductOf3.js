@@ -1,5 +1,5 @@
 /**
- * 3 - Highest Product of 3 - time / space
+ * 3 - Highest Product of 3
  * @param {Array} A - array of integers
  * @return {Int} - highest product of the integers
  */

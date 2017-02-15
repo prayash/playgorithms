@@ -1,5 +1,5 @@
 /**
- * 2 - Product of All Other Numbers - O(n) time / O(n) space
+ * 2 - Product of All Other Numbers
  * @param {Array} A - array of integers
  * @return {Array} - array of products
  */
