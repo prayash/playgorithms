@@ -1,22 +1,9 @@
 'use strict';
-
+var swap = require('./utils.js').swap;
 var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
-console.log("\t - unsoredArray: ", arr);
+console.log("\t - unsortedArray:", arr);
 
 // *****************************************************************
-
-/**
- * Swaps two values in an array.
- * @param {Array} arr - array containing the items.
- * @param {int} x - index of first item to swap.
- * @param {int} y - index of second item to swap.
- * @return {void}
- */
-function swap(arr, x, y) {
-  var temp = arr[x];
-  arr[x] = arr[y];
-  arr[y] = temp;
-}
 
 /**
  * Bubble Sort - O(n²) time / O(1) space
@@ -185,14 +172,14 @@ function heapSort(arr, cmp) {
     size -= 1;
     heapify(arr, 0, size, cmp);
   }
-  
+
   return arr;
 }
 
 console.log("\t > heapSort: \t ", heapSort(arr));
 
 /**
- * Quick Sort -  O(n^2) time / O(n) space
+ * Quick Sort -  O(n log n) time avg. || O(n^2) worse / O(n) space
  * Quicksort is a divide and conquer algorithm in the style of merge sort.
  * The basic idea is to find a “pivot” item in the array to compare all other items against, then shift items such
  * that all of the items before the pivot are less than the pivot value and all the items after the pivot are greater

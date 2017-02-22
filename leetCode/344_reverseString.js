@@ -1,3 +1,5 @@
+var swap = require('../utils.js').swap;
+
 /**
  * Reverse a string.
  * @param {String} str - string to reverse

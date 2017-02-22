@@ -1,19 +1,23 @@
 /**
- * Linked List Cycle
- * @param {Node} head
- * @return {Node}
+ * 23 - Does This Linked List Have A Cycle?
+ * @param {Node} head - head of Linked List
+ * @return {Boolean}
  */
 function hasCycle(head) {
   var slow = head;
   var fast = head;
 
-  while (slow && fast && fast.next) {
+  while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
 
-    if (slow === fast) return true;
+    if (slow === fast) {
+      console.log('\t -> hasCycle:', true);
+      return true;
+    }
   }
 
+  console.log('\t -> hasCycle:', false);
   return false;
 }
 
@@ -30,4 +34,4 @@ listHead.next.next = new ListNode(98);
 listHead.next.next.next = new ListNode(111);
 // listHead.next.next.next.next = listHead.next;
 
-console.log("\t linkedListCycle:", hasCycle(listHead));
+hasCycle(listHead);

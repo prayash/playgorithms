@@ -1,7 +1,7 @@
 /**
  * 6 - Making Change
  * @param {Array of Ints} A - input array of denominations
- * @return {} - meeting times merged
+ * @return {Int} - max ways to make change
  */
 function makingChange(amount, A) {
   var res = [];
@@ -14,8 +14,9 @@ function makingChange(amount, A) {
     for (var i = coin; i <= amount; i++) {
       var remainder = i - coin;
       res[i] += res[remainder];
+      console.log("\t " + coin + ":", res);
     }
-  })
+  });
 
   console.log("\t -> makingChange:", res);
   return res;

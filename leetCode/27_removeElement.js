@@ -23,3 +23,7 @@ function removeElement(A, val) {
   console.log("\t -> removeElement:", "inputSize:", A.length, "| outputSize:", n);
   return n;
 }
+
+var A = [3, 2, 2, 3];
+var val = 2;
+removeElement(A, val);

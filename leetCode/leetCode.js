@@ -1,38 +1,6 @@
 'use strict';
 
 /**
- * Swaps two values in an array.
- * @param {Array} arr - array containing the items.
- * @param {int} x - index of first item to swap.
- * @param {int} y - index of second item to swap.
- * @return {void}
- */
-function swap(arr, x, y) {
-  var temp = arr[x];
-  arr[x] = arr[y];
-  arr[y] = temp;
-}
-
-/**
- * Reverses an array.
- * @param {Array} arr - array to reverse.
- * @param {int} i - index to begin range.
- * @param {int} j - index to end range.
- * @return {void}
- */
-function reverse(arr, i, j) {
-  while (i < j) {
-    swap(arr, i, j);
-    i++;
-    j--;
-  }
-}
-
-var A = [3, 2, 2, 3];
-var val = 2;
-removeElement(A, val);
-
-/**
  * Character Frequency - O(n) time / O(n) space
  * Use a hash table to count the frequency of each character in a given string.
  * @param {String} str - String to process
@@ -283,3 +251,83 @@ function longestAbsolutePath(S) {
 
 var input = "dir1\n dir11\n dir12\n  picture.jpeg\n  dir121\n  file1.txt\ndir2\n file2.gif";
 longestAbsolutePath(input);
+
+
+function printPrime(value) {
+
+  // Assume everything is prime to start off
+  var primes = [];
+  for (var i = 2; i < value; i++) {
+    primes[i] = true;
+  }
+
+  // Limit our looping by square root
+  var limit = Math.sqrt(value);
+
+  // Loop until square rooted limit
+  for (var i = 2; i < limit; i++) {
+    // console.log(primes);
+    console.log("--- i:", i);
+
+    // Mark all composite numbers as not prime!
+    for (var j = i * i; j < value; j += i) {
+      console.log("j:", j);
+      primes[j] = false;
+    }
+  }
+
+  for (var i = 2; i < value; i++) {
+    if (primes[i] === true) {
+      console.log(i + " " + primes[i]);
+    }
+  }
+}
+
+printPrime(15);
+
+function checkDuplicateNeighbors(A, k) {
+  var map = new Map();
+  for (var i = 0; i < A.length; i++) {
+    if (map.has(A[i])) {
+      console.log("\t -> checkDuplicateNeighbors:", true);
+      return true;
+    }
+
+    map.set(A[i], true);
+
+    if (i >= k) {
+      map.delete(A[i - k]);
+    }
+  }
+
+  console.log("\t -> checkDuplicateNeighbors:", false);
+  return false;
+}
+
+var A = [1, 2, 3, 4, 1, 2, 3, 4];
+// var A = [1, 2, 3, 1, 4, 5];
+checkDuplicateNeighbors(A, 3);
+
+function LCS(a, b) {
+  var longest = "";
+  // loop through the first string
+  for (var i = 0; i < a.length; ++i) {
+    // loop through the second string
+    for (var j = 0; j < b.length; ++j) {
+      // if it's the same letter
+      if (a[i] === b[j]) {
+        var str = a[i];
+        var k = 1;
+        // keep going until the letters no longer match, or we reach end
+        while (i+k < a.length && j+k < b.length // haven't reached end
+               && a[i+k] === b[j+k]) { // same letter
+          str += a[i+k];
+          ++k;
+        }
+        // if this substring is longer than the longest, save it as the longest
+        if (str.length > longest.length) { longest = str }
+      }
+    }
+  }
+  return longest;
+}

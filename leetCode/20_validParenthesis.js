@@ -22,7 +22,7 @@ function validParentheses(s) {
     }
   }
 
-  result = stack.length === 0 ? true : false;
+  result = stack.length === 0;
   console.log("\t -> validParentheses:", result);
   return result;
 }
